@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const sqlite = require('sqlite');
-const { response } = require('express');
+
+
+
 
 /* usando express.json() no lugar de body-parser pois ja está incluso na biblioteca e é mais recomendado
 
@@ -18,6 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const dbConnection = sqlite.open('banco.sqlite', { Promise });
+
+const port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs'); //seta parametros para olhar na pasta view, e procurar arquivos .ejs
 
@@ -166,10 +170,10 @@ const init = async () => {
 
 init();
 
-app.listen(3000, (err) => {
+app.listen(port, (err) => {
     if (err) {
         console.log('Não foi possível iniciar o servidor.');
     } else {
-        console.log('Servidor do Jobify Iniciando!');
+        console.log('Servidor do Jobify Iniciado!',);
     }
 });
