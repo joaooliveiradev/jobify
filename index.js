@@ -4,7 +4,7 @@ const sqlite = require('sqlite');
 
 
 const path = require('path');
-const { dirname } = require('path');
+
 
 /* usando express.json() no lugar de body-parser pois ja está incluso na biblioteca e é mais recomendado
 
@@ -25,7 +25,7 @@ const dbConnection = sqlite.open(path.resolve(__dirname,'banco.sqlite'), { Promi
 const port = process.env.PORT || 3000;
 
 
-
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs'); //seta parametros para olhar na pasta view, e procurar arquivos .ejs
 
 app.use(express.static('public'));
