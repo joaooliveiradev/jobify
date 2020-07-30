@@ -1,0 +1,50 @@
+body{
+    font-family: 'Roboto', sans-serif;
+}
+h1{
+    text-align: center;
+}
+p{
+    text-align: center;
+}
+h2{
+    background-color: #C4C4C4;
+    padding: 8px;
+    font-size: 24px;
+}
+h3{
+    font-size: 24px;
+}
+ul{
+    list-style: none    ;
+    padding-left: 16px;
+}
+li{
+    margin-left: 0;
+    font-size: 22px;
+}
+
+label{
+    display: block;
+    margin: 20px 0px 10px 0px;
+}
+input{
+    display: block;
+    padding: 4px;
+    width: 200px;
+}
+select{
+    margin: 0px 0px 20px 0px;
+}
+
+.novaVaga{
+    text-decoration: none;
+    color: green;   
+}
+.excluirButton,.editarButton{
+    margin: 0px 10px;
+    text-decoration: none;
+    color: blueviolet;
+    font-weight: 600;
+    font-size: 22px;
+}
