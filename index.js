@@ -3,7 +3,8 @@ const app = express();
 const sqlite = require('sqlite');
 
 
-
+const path = require('path');
+const { dirname } = require('path');
 
 /* usando express.json() no lugar de body-parser pois ja está incluso na biblioteca e é mais recomendado
 
@@ -19,9 +20,11 @@ basicamente express.json() é o middleware para lidar com os dados que estão vi
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const dbConnection = sqlite.open('banco.sqlite', { Promise });
+const dbConnection = sqlite.open(path.resolve(__dirname,'banco.sqlite'), { Promise });
 
 const port = process.env.PORT || 3000;
+
+
 
 app.set('view engine', 'ejs'); //seta parametros para olhar na pasta view, e procurar arquivos .ejs
 
