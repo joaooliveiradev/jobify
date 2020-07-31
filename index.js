@@ -20,7 +20,7 @@ basicamente express.json() é o middleware para lidar com os dados que estão vi
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const dbConnection = sqlite.open(path.resolve(__dirname,'banco.sqlite'), { Promise });
+const dbConnection = sqlite.open(path.resolve(__dirname, 'banco.sqlite'), { Promise });
 
 const port = process.env.PORT || 3000;
 
@@ -28,7 +28,9 @@ const port = process.env.PORT || 3000;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs'); //seta parametros para olhar na pasta view, e procurar arquivos .ejs
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 /*apos receber uma chamada no '/' da porta 3000 o app pega com o .get o request 
 e responde o response renderizando a view home  */
@@ -133,7 +135,7 @@ app.post('/admin/categorias/criarCategoria', async (req, res) => {
     res.redirect('/admin/categorias');
 });
 
-app.get('/admin/categorias/deletarCategoria/:id', async(req,res)=>{
+app.get('/admin/categorias/deletarCategoria/:id', async (req, res) => {
     const db = await dbConnection;
     await db.run('delete from categorias where id = ' + req.params.id);
     res.redirect('/admin/categorias');
