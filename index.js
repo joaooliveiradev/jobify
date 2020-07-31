@@ -22,7 +22,21 @@ app.use(express.urlencoded({ extended: true }));
 
 const dbConnection = sqlite.open(path.resolve(__dirname, 'banco.sqlite'), { Promise });
 
+//definindo variavel de ambiente, caso não seja possivel definir ele vai escolher 3000.
 const port = process.env.PORT || 3000;
+
+app.use('/admin', (req, res, next) => {
+    /*req.hostname retorna o nome do servidor, exemplo, localhost:3000, req.hostname vai voltar localhost
+    aqui estamos verificando se hostname === localhost porque só vamos dar next() para ele continuar a aplicação
+    quando estiver rodando na nossa maquina, ou seja, localhost, isso serve como segurança para outros usuarios
+    não entrarem e fazerem mudança em nossa aplicação, será que é uma gambiarra? não sei. 
+    */ 
+    if (req.hostname === "localhost") {
+        next();
+    } else {
+        res.send('Not allowed');
+    }
+});
 
 
 app.set('views', path.join(__dirname, 'views'));
@@ -83,7 +97,7 @@ app.get('/admin/vagas/criarVaga', async (req, res) => {
     });
 });
 
-app.post('/admin/vagas/nova', async (req, res) => {
+app.post('/admin/vagas/criarVaga', async (req, res) => {
     const db = await dbConnection;
     const { titulo, descricao, categoria } = req.body;
     await db.run(`insert into vagas(categoria,titulo,descricao) values(${categoria},'${titulo}','${descricao}')`);
